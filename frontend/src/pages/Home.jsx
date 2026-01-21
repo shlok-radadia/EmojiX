@@ -3,68 +3,165 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   useEffect(() => {
-    document.title = `EmojiX`;
+    document.title = "EmojiX";
   }, []);
 
   return (
-    <main className="pt-24 px-6">
-      <div className="max-w-5xl mx-auto">
-        {/* HERO */}
-        <section className="max-w-2xl mb-20">
-          <h1 className="text-5xl font-semibold leading-tight mb-6">
-            Explore. Collect.
-            <br />
-            Progress naturally.
-          </h1>
+    <main className="h-screen bg-[#0f0f12] text-white overflow-y-auto">
+      {/* ================= HERO ================= */}
+      <section className="relative px-6 pt-28 pb-32">
+        {/* Glow */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-indigo-500/10 blur-[120px]" />
+        </div>
 
-          <p className="text-gray-400 text-lg mb-8">
-            EmojiX is a grid-based exploration game where every move can reveal
-            a new emoji. Discover rare finds, manage your inventory, and grow
-            your coin balance at your own pace.
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* LEFT */}
+          <div>
+            <span className="inline-block mb-4 px-3 py-1 text-xs rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">
+              Persistent Exploration Game
+            </span>
+
+            <h1 className="text-5xl md:text-6xl font-semibold leading-tight tracking-tight mb-6">
+              Explore.
+              <br />
+              Collect.
+              <br />
+              <span className="text-indigo-400">Progress naturally.</span>
+            </h1>
+
+            <p className="text-gray-400 text-lg leading-relaxed max-w-xl mb-10">
+              EmojiX is a calm, systems-driven exploration game where every step
+              matters. Discover emojis across biomes, complete quests, trade
+              with players, and build your collection at your own pace.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                to="/signup"
+                className="px-7 py-3 rounded-lg bg-indigo-500 hover:bg-indigo-400
+                font-medium transition shadow-lg shadow-indigo-500/25"
+              >
+                Start Exploring
+              </Link>
+
+              <Link
+                to="/login"
+                className="px-7 py-3 rounded-lg border border-[#2f2f38]
+                hover:bg-[#1f1f26] transition"
+              >
+                Login
+              </Link>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="hidden md:block">
+            <div
+              className="rounded-3xl bg-gradient-to-b from-[#16161f] to-[#0d0d13]
+            border border-[#222] p-6 shadow-2xl"
+            >
+              <div className="grid grid-cols-5 gap-3">
+                {["🌱", "🌲", "🌵", "🌊", "❄️", "🔥", "🐲", "🦄", "🧙"].map(
+                  (e, i) => (
+                    <div
+                      key={i}
+                      className="aspect-square flex items-center justify-center
+                      rounded-xl bg-black/30 text-2xl"
+                    >
+                      {e}
+                    </div>
+                  ),
+                )}
+              </div>
+
+              <div className="mt-6 text-sm text-gray-400">
+                Discover emojis across biomes, rarities & variants.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= SYSTEMS ================= */}
+      <section className="px-6 pb-28">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-14 text-center">
+            <h2 className="text-3xl font-semibold mb-3">
+              Designed as a living system
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              EmojiX isn’t about grinding. It’s about discovery, balance, and
+              player-driven progression.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <SystemCard
+              icon="🧭"
+              title="Exploration"
+              desc="Infinite grid with biome-based discovery and movement rewards."
+            />
+            <SystemCard
+              icon="📜"
+              title="Quests"
+              desc="Persistent quests that progress naturally as you play."
+            />
+            <SystemCard
+              icon="🎒"
+              title="Inventory & Items"
+              desc="Instance-based emojis and items that modify gameplay."
+            />
+            <SystemCard
+              icon="🔁"
+              title="Trading"
+              desc="Player-driven market with real scarcity and pricing."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="px-6 pb-32">
+        <div
+          className="max-w-4xl mx-auto rounded-3xl
+          bg-gradient-to-br from-indigo-500/15 to-transparent
+          border border-indigo-500/30 p-10 text-center"
+        >
+          <h3 className="text-3xl font-semibold mb-4">
+            Start your journey today
+          </h3>
+          <p className="text-gray-400 mb-8">
+            No timers. No pressure. Just meaningful progression.
           </p>
 
-          <div className="flex gap-4">
-            <Link
-              to="/signup"
-              className="px-6 py-3 bg-indigo-500 text-white rounded-md hover:bg-indigo-400"
-            >
-              Start exploring
-            </Link>
-
-            <Link
-              to="/login"
-              className="px-6 py-3 border border-[#3a3a42] rounded-md hover:bg-[#2a2a31]"
-            >
-              Login
-            </Link>
-          </div>
-        </section>
-
-        {/* FEATURES */}
-        <section className="grid md:grid-cols-3 gap-8">
-          <Feature
-            title="Calm exploration"
-            desc="Move across the grid without pressure. Each step is meaningful."
-          />
-          <Feature
-            title="Balanced rarity"
-            desc="Emojis range from Common to Legendary with fair progression."
-          />
-          <Feature
-            title="Healthy economy"
-            desc="Catch emojis, sell them for coins, and plan your next move."
-          />
-        </section>
-      </div>
+          <Link
+            to="/signup"
+            className="inline-block px-8 py-3 rounded-lg
+            bg-indigo-500 hover:bg-indigo-400 transition
+            font-medium shadow-lg shadow-indigo-500/30"
+          >
+            Create your account
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
 
-function Feature({ title, desc }) {
+/* ================= COMPONENTS ================= */
+
+function SystemCard({ icon, title, desc }) {
   return (
-    <div className="bg-[#2a2a31] p-6 rounded-lg border border-[#34343c]">
-      <h3 className="text-lg font-medium mb-2 text-gray-100">{title}</h3>
-      <p className="text-gray-400 leading-relaxed">{desc}</p>
+    <div
+      className="rounded-2xl bg-[#141418] border border-[#222]
+      p-6 flex flex-col gap-3
+      hover:-translate-y-1 hover:border-indigo-500/40
+      transition"
+    >
+      <div className="text-2xl">{icon}</div>
+      <h3 className="font-medium text-lg">{title}</h3>
+      <p className="text-sm text-gray-400 leading-relaxed">{desc}</p>
     </div>
   );
 }
