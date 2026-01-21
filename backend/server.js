@@ -56,15 +56,15 @@ app.use("/api/quests", questRoutes);
 app.use("/api/trades", tradeRoutes);
 app.use("/api/profile", profileRoutes);
 
-// const __dirname = path.resolve();
+const __dirname = path.resolve();
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "frontend/dist")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/dist")));
 
-//   app.get(/.*/, (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-//   });
-// }
+  app.get(/.*/, (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
 
 connectDB().then(() => {
   app.listen(PORT, () => {
