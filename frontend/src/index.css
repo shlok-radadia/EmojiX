@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+body {
+  background-color: #1e1e22;
+  color: #e5e7eb;
+  font-family: ui-sans-serif, system-ui, -apple-system;
+}
+
+button {
+  cursor: pointer;
+}
+
+.move-btn {
+  @apply px-5 py-2 rounded-md bg-[#2a2a31] border border-[#34343c] hover:bg-[#34343c] text-lg;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2a2a32;
+  border-radius: 6px;
+}
