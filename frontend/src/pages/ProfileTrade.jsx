@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import api from "../api/axios";
 
-/* ================= UI CONFIG ================= */
-
 const rarityStyle = {
   Common: "border-gray-500/30",
   Uncommon: "border-green-500/40",
@@ -20,12 +18,14 @@ const variantBadge = {
   Corrupted: "bg-purple-700/30 text-purple-300",
 };
 
-/* ================= COMPONENT ================= */
-
 export default function ProfileTrades() {
   const { userId } = useParams();
   const [trades, setTrades] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = "Trade";
+  }, []);
 
   useEffect(() => {
     api.get(`/profile/${userId}/trades`).then((res) => {
@@ -53,7 +53,6 @@ export default function ProfileTrades() {
         ← Back to Profile
       </Link>
 
-      {/* ================= HEADER ================= */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold tracking-tight">
           🔁 Active Trade Listings
@@ -63,14 +62,12 @@ export default function ProfileTrades() {
         </p>
       </div>
 
-      {/* ================= EMPTY ================= */}
       {trades.length === 0 && (
         <div className="text-gray-500 text-sm">
           This player has no active trades.
         </div>
       )}
 
-      {/* ================= GRID ================= */}
       <div
         className="grid gap-6"
         style={{
@@ -85,7 +82,6 @@ export default function ProfileTrades() {
             transition hover:-translate-y-1 hover:shadow-xl
             ${rarityStyle[t.rarity]}`}
           >
-            {/* VARIANT */}
             <div
               className={`absolute top-3 right-3 px-2 py-0.5 rounded-full text-[10px]
               ${variantBadge[t.variant]}`}
@@ -93,21 +89,16 @@ export default function ProfileTrades() {
               {t.variant}
             </div>
 
-            {/* EMOJI */}
             <div className="text-[3.2rem] select-none mb-2">{t.symbol}</div>
 
-            {/* NAME */}
             <div className="font-medium text-sm truncate w-full">{t.name}</div>
 
-            {/* META */}
             <div className="text-[11px] text-gray-400 mt-0.5">{t.rarity}</div>
 
-            {/* PRICE */}
             <div className="mt-2 text-amber-400 text-sm font-medium">
               🪙 {t.price}
             </div>
 
-            {/* FOOTER */}
             <div className="mt-2 text-[10px] text-gray-500">
               Listed for trade
             </div>

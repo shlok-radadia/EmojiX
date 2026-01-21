@@ -22,18 +22,16 @@ function getFinalRarity(base, variant) {
 
 function rollVariant() {
   const roll = Math.random();
-  // return "Corrupted";
+
   if (roll < 0.75) return "Normal";
   if (roll < 0.9) return "Shiny";
   if (roll < 0.98) return "Alpha";
   return "Corrupted";
 }
 
-/* ---------------- MOVE USER ---------------- */
 export const moveUser = async (req, res) => {
   try {
     const { direction } = req.body;
-    // const user = req.user;
 
     const delta = {
       UP: { x: 0, y: 1 },
@@ -46,23 +44,18 @@ export const moveUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid direction" });
     }
 
-    // 🔥 IMPORTANT: fetch real mongoose document
-    // console.log(req);
     const user = await User.findById(req.user.id);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Ensure runPosition exists
     if (!user.runPosition) {
       user.runPosition = { x: 0, y: 0 };
     }
 
-    // Move
     user.runPosition.x += delta[direction].x;
     user.runPosition.y += delta[direction].y;
 
-    // Coins for Movement
     const STEP_REWARD_THRESHOLD = 20;
     const STEP_REWARD_COINS = 5;
 
@@ -89,16 +82,12 @@ export const moveUser = async (req, res) => {
       user.coins += item.effect.value;
     }
 
-    // Coins for Movement (End)
-
     user.questProgressBuffer.move += 1;
 
     await user.save();
 
     const biome = getBiome(user.runPosition.x, user.runPosition.y);
-    // const biome = "Snow";
 
-    /* ---------- SPAWN LOGIC ---------- */
     const spawnRoll = Math.random();
     let spawnChance = 0.35;
 
@@ -107,8 +96,6 @@ export const moveUser = async (req, res) => {
     }
 
     spawnChance = Math.min(spawnChance, 0.8);
-
-    // console.log(spawnChance);
 
     if (spawnRoll > spawnChance) {
       return res.json({
@@ -122,7 +109,6 @@ export const moveUser = async (req, res) => {
       });
     }
 
-    /* ---------- PICK EMOJI ---------- */
     const biomeEmojis = await EmojiCatalog.find({
       biomes: { $in: [biome] },
     });
@@ -147,11 +133,9 @@ export const moveUser = async (req, res) => {
     else if (roll >= 92 && roll < 98) rarity = "Epic";
     else if (roll >= 98 && roll < 99.8) rarity = "Mythic";
     else if (roll >= 99.8) rarity = "Legendary";
-    // rarity = "Epic";
 
     let pool = biomeEmojis.filter((e) => e.rarity === rarity);
 
-    // fallback to lower rarity if empty
     if (pool.length === 0) {
       pool = biomeEmojis.filter((e) => e.rarity === "Common");
     }
@@ -170,10 +154,8 @@ export const moveUser = async (req, res) => {
 
     const emoji = pool[Math.floor(Math.random() * pool.length)];
 
-    // 🎲 Roll variant
     const variant = rollVariant();
 
-    // ⭐ Compute final rarity
     const finalRarity = getFinalRarity(emoji.rarity, variant);
 
     return res.json({

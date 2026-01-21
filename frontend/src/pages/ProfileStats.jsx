@@ -27,14 +27,16 @@ export default function ProfileStats() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    api.get(`/profile/${userId}/stats`).then((res) => setData(res.data));
+    api.get(`/profile/${userId}/stats`).then((res) => {
+      setData(res.data);
+      document.title = `${res.data.username} • Profile`;
+    });
   }, [userId]);
 
   if (!data) return <Loading />;
 
   return (
     <div className="h-full bg-[#0f0f12] text-white px-6 py-8 space-y-8 overflow-y-auto">
-      {/* ================= HEADER ================= */}
       <div className="rounded-2xl bg-gradient-to-br from-indigo-500/10 to-transparent border border-indigo-500/30 p-6 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-semibold tracking-tight flex items-center gap-2">
@@ -57,15 +59,12 @@ export default function ProfileStats() {
         </div>
       </div>
 
-      {/* ================= STATS ================= */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* COLLECTION */}
         <StatGroup title="Collection">
           <Stat label="Total Emojis Owned" value={data.stats.emojisOwned} />
           <Stat label="Unique Emojis" value={data.stats.uniqueEmojis} />
         </StatGroup>
 
-        {/* TRADING */}
         <StatGroup title="Trading">
           <Stat
             label="Active Trade Listings"
@@ -78,7 +77,6 @@ export default function ProfileStats() {
         </StatGroup>
       </div>
 
-      {/* ================= RARITY DISTRIBUTION ================= */}
       <div className="rounded-2xl bg-[#141418] border border-[#222] p-6">
         <h2 className="text-sm font-medium text-gray-300 mb-4">
           Rarity Distribution
@@ -109,7 +107,6 @@ export default function ProfileStats() {
         </div>
       </div>
 
-      {/* ================= VARIANT DISTRIBUTION ================= */}
       <div className="rounded-2xl bg-[#141418] border border-[#222] p-6">
         <h2 className="text-sm font-medium text-gray-300 mb-4">
           Variant Distribution
@@ -130,7 +127,6 @@ export default function ProfileStats() {
         </div>
       </div>
 
-      {/* ================= QUICK LINKS ================= */}
       <div className="flex flex-wrap gap-3 pt-2">
         <ProfileLink
           to={`/profile/${userId}/inventory`}
@@ -141,8 +137,6 @@ export default function ProfileStats() {
     </div>
   );
 }
-
-/* ================= COMPONENTS ================= */
 
 function StatGroup({ title, children }) {
   return (

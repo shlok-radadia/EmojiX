@@ -26,7 +26,6 @@ router.get("/", protect, async (req, res) => {
   });
 });
 
-/* EQUIP / UNEQUIP */
 router.post("/equip", protect, equipItem);
 router.post("/unequip", protect, unequipItem);
 

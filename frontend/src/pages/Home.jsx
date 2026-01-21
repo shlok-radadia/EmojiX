@@ -8,15 +8,12 @@ export default function Home() {
 
   return (
     <main className="h-screen bg-[#0f0f12] text-white overflow-y-auto">
-      {/* ================= HERO ================= */}
       <section className="relative px-6 pt-28 pb-32">
-        {/* Glow */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-indigo-500/10 blur-[120px]" />
         </div>
 
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          {/* LEFT */}
           <div>
             <span className="inline-block mb-4 px-3 py-1 text-xs rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300">
               Persistent Exploration Game
@@ -55,7 +52,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="hidden md:block">
             <div
               className="rounded-3xl bg-gradient-to-b from-[#16161f] to-[#0d0d13]
@@ -83,7 +79,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= SYSTEMS ================= */}
       <section className="px-6 pb-28">
         <div className="max-w-6xl mx-auto">
           <div className="mb-14 text-center">
@@ -121,7 +116,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
       <section className="px-6 pb-32">
         <div
           className="max-w-4xl mx-auto rounded-3xl
@@ -148,8 +142,6 @@ export default function Home() {
     </main>
   );
 }
-
-/* ================= COMPONENTS ================= */
 
 function SystemCard({ icon, title, desc }) {
   return (

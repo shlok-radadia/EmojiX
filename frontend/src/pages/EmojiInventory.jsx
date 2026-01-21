@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 
-/* ================= CONFIG ================= */
-
 const VARIANTS = ["Normal", "Shiny", "Alpha", "Corrupted"];
 const RARITIES = ["Common", "Uncommon", "Rare", "Epic", "Mythic", "Legendary"];
 const BIOMES = [
@@ -46,8 +44,6 @@ const biomeIcon = {
   Volcano: "🌋",
 };
 
-/* ================= COMPONENT ================= */
-
 export default function EmojiInventory() {
   const [items, setItems] = useState([]);
   const [coins, setCoins] = useState(0);
@@ -87,7 +83,6 @@ export default function EmojiInventory() {
 
   return (
     <div className="h-full bg-[#0f0f12] text-white flex flex-col overflow-hidden">
-      {/* HEADER */}
       <div className="px-8 py-5 flex justify-between items-center border-b border-[#1f1f2a]">
         <h1 className="text-2xl font-semibold tracking-tight">
           Emoji Inventory
@@ -97,7 +92,6 @@ export default function EmojiInventory() {
         </div>
       </div>
 
-      {/* FILTER BAR */}
       <div className="px-8 py-3 flex gap-3 border-b border-[#1f1f2a] text-sm">
         <input
           value={search}
@@ -127,7 +121,6 @@ export default function EmojiInventory() {
         />
       </div>
 
-      {/* GRID */}
       <div className="flex-1 overflow-y-auto px-8 py-6">
         {sellConfirm && (
           <div className="mb-4 rounded-xl bg-[#14141c] border border-red-500/30 p-4 flex justify-between items-center">
@@ -223,7 +216,6 @@ export default function EmojiInventory() {
               flex flex-col justify-between transition
               shadow-lg ${rarityGlow[e.finalRarity]}`}
             >
-              {/* VARIANT BADGE */}
               <div
                 className={`absolute top-3 right-3 px-2 py-0.5 rounded-full text-[10px]
                 ${variantBadge[e.variant]}`}
@@ -231,7 +223,6 @@ export default function EmojiInventory() {
                 {e.variant}
               </div>
 
-              {/* EMOJI */}
               <div
                 className="text-center text-[3.2rem] select-none"
                 title={e.name}
@@ -243,12 +234,10 @@ export default function EmojiInventory() {
                 {e.name}
               </div>
 
-              {/* RARITY */}
               <div className="text-center text-xs text-gray-400">
                 {e.finalRarity}
               </div>
 
-              {/* BIOMES */}
               <div className="flex justify-center gap-1 text-sm opacity-70">
                 {e.biomes.map((b) => (
                   <span key={b} title={b}>
@@ -257,7 +246,6 @@ export default function EmojiInventory() {
                 ))}
               </div>
 
-              {/* META */}
               <div className="text-[10px] text-gray-500 text-center">
                 {new Date(e.caughtAt).toLocaleDateString()}
               </div>
@@ -295,8 +283,6 @@ export default function EmojiInventory() {
     </div>
   );
 }
-
-/* ================= FILTER ================= */
 
 function Filter({ label, options, value, onChange }) {
   return (

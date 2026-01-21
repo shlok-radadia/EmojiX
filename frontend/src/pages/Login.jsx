@@ -38,16 +38,13 @@ export default function Login() {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-[#2a2a31] border border-[#34343c] rounded-xl p-8">
-        {/* Header */}
         <h2 className="text-2xl font-semibold mb-2">Welcome back</h2>
         <p className="text-gray-400 mb-6">
           Login to continue exploring EmojiX.
         </p>
 
-        {/* Error */}
         {error && <div className="mb-4 text-sm text-red-400">{error}</div>}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm mb-1 text-gray-300">Email</label>
@@ -80,7 +77,6 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Footer */}
         <p className="mt-6 text-sm text-gray-400 text-center">
           Don't have an account?{" "}
           <Link to="/signup" className="text-indigo-400 hover:text-indigo-300">

@@ -1,16 +1,15 @@
 const REGION_SIZE = 4;
 
-// deterministic pseudo-random noise
 const noise2D = (x, y) => {
   const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453123;
-  return s - Math.floor(s); // 0..1
+  return s - Math.floor(s);
 };
 
 export const getBiome = (x, y) => {
   const rx = Math.floor(x / REGION_SIZE);
   const ry = Math.floor(y / REGION_SIZE);
 
-  const scale = REGION_SIZE / 12; // ← critical
+  const scale = REGION_SIZE / 12;
 
   const n1 = noise2D(rx * 0.08 * scale, ry * 0.08 * scale);
   const n2 = noise2D(rx * 0.02 * scale + 100, ry * 0.02 * scale + 100);
@@ -19,7 +18,7 @@ export const getBiome = (x, y) => {
 
   const volcanoNoise = noise2D(
     rx * 0.01 * scale + 999,
-    ry * 0.01 * scale + 999
+    ry * 0.01 * scale + 999,
   );
 
   if (volcanoNoise > 0.985) return "Volcano";

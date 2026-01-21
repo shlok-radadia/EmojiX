@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { Link } from "react-router-dom";
 
-/* ================= CONFIG ================= */
-
 const RARITIES = ["Common", "Uncommon", "Rare", "Epic", "Mythic", "Legendary"];
 const VARIANTS = ["Normal", "Shiny", "Alpha", "Corrupted"];
 
@@ -23,8 +21,6 @@ const variantBadge = {
   Corrupted: "bg-purple-700/40 text-purple-200",
 };
 
-/* ================= COMPONENT ================= */
-
 export default function TradeMarket() {
   const [trades, setTrades] = useState([]);
   const [coins, setCoins] = useState(0);
@@ -37,8 +33,6 @@ export default function TradeMarket() {
   const [messageType, setMessageType] = useState("info");
   const [loading, setLoading] = useState(false);
   const [buyConfirm, setBuyConfirm] = useState(null);
-
-  /* ================= LOAD ================= */
 
   const loadTrades = async () => {
     setLoading(true);
@@ -60,10 +54,12 @@ export default function TradeMarket() {
   };
 
   useEffect(() => {
+    document.title = "Trade";
+  }, []);
+
+  useEffect(() => {
     loadTrades();
   }, [search, rarity, variant, mine]);
-
-  /* ================= ACTIONS ================= */
 
   const showMessage = (text, type = "info") => {
     setMessage(text);
@@ -88,11 +84,8 @@ export default function TradeMarket() {
     loadTrades();
   };
 
-  /* ================= UI ================= */
-
   return (
     <div className="h-full bg-[#0f0f12] text-white flex flex-col overflow-hidden">
-      {/* HEADER */}
       <div className="px-8 py-5 border-b border-[#222] flex justify-between items-center">
         <h1 className="text-2xl font-semibold">🔁 Trade Market</h1>
         <div className="text-sm text-gray-400">
@@ -100,7 +93,6 @@ export default function TradeMarket() {
         </div>
       </div>
 
-      {/* FILTER BAR */}
       <div className="px-8 py-3 flex flex-wrap gap-3 border-b border-[#222] text-sm">
         <input
           placeholder="Search emoji name…"
@@ -133,7 +125,6 @@ export default function TradeMarket() {
         </label>
       </div>
 
-      {/* MESSAGE */}
       {message && (
         <div
           className={`px-8 py-2 text-sm border-b
@@ -147,7 +138,6 @@ export default function TradeMarket() {
         </div>
       )}
 
-      {/* GRID */}
       <div className="flex-1 overflow-y-auto px-8 py-6 scrollbar-thin scrollbar-thumb-[#2a2a32]">
         {loading && (
           <div className="text-gray-500 text-sm">Loading trades…</div>
@@ -209,29 +199,24 @@ export default function TradeMarket() {
               transition hover:-translate-y-1 hover:shadow-xl
               ${rarityStyle[t.rarity]}`}
             >
-              {/* VARIANT */}
               <div
                 className={`self-end px-2 py-0.5 text-[10px] rounded-full ${variantBadge[t.variant]}`}
               >
                 {t.variant}
               </div>
 
-              {/* EMOJI */}
               <div className="text-center text-5xl mt-2 select-none">
                 {t.symbol}
               </div>
 
-              {/* NAME */}
               <div className="text-center font-medium mt-1 truncate">
                 {t.name}
               </div>
 
-              {/* RARITY */}
               <div className="text-center text-xs text-gray-400">
                 {t.rarity}
               </div>
 
-              {/* SELLER */}
               {!t.mine && t.seller && (
                 <div className="text-[11px] text-gray-400 text-center mt-1">
                   Seller:{" "}
@@ -244,12 +229,10 @@ export default function TradeMarket() {
                 </div>
               )}
 
-              {/* PRICE */}
               <div className="text-center mt-2 text-amber-400 text-sm font-medium">
                 🪙 {t.price}
               </div>
 
-              {/* ACTION */}
               {t.mine ? (
                 <button
                   onClick={() => cancel(t.tradeId)}
@@ -282,8 +265,6 @@ export default function TradeMarket() {
     </div>
   );
 }
-
-/* ================= SELECT ================= */
 
 function Select({ label, options, value, onChange }) {
   return (

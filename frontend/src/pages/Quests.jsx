@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 
-/* ================= STYLES ================= */
-
 const difficultyColor = {
   Easy: "bg-green-500/15 text-green-300",
   Medium: "bg-blue-500/15 text-blue-300",
@@ -25,6 +23,7 @@ export default function Quests() {
   const [confirmReroll, setConfirmReroll] = useState(null);
 
   useEffect(() => {
+    document.title = "Quests";
     loadQuests();
     api.get("/auth/me").then((res) => setCoins(res.data.coins ?? 0));
   }, []);
@@ -48,7 +47,6 @@ export default function Quests() {
 
   return (
     <div className="h-full bg-[#0f0f12] text-white flex flex-col overflow-hidden">
-      {/* HEADER */}
       <div className="px-8 py-5 border-b border-[#1f1f2a] flex justify-between">
         <h1 className="text-2xl font-semibold">📜 Quests</h1>
         <div className="text-sm text-gray-400">
@@ -60,7 +58,6 @@ export default function Quests() {
         <div className="px-8 py-2 text-sm text-indigo-300">{message}</div>
       )}
 
-      {/* QUEST LIST */}
       <div className="flex-1 overflow-y-auto px-8 py-6 grid gap-5">
         {quests.map((q) => {
           const progress = Math.min(
@@ -73,7 +70,6 @@ export default function Quests() {
               key={q._id}
               className="rounded-2xl bg-[#141418] border border-[#24242c] p-5 flex flex-col gap-3"
             >
-              {/* HEADER */}
               <div className="flex justify-between items-start">
                 <div className="flex gap-3">
                   <div className="text-2xl">{typeIcon[q.quest.type]}</div>
@@ -93,7 +89,6 @@ export default function Quests() {
                 </span>
               </div>
 
-              {/* PROGRESS */}
               <div>
                 <div className="flex justify-between text-xs text-gray-400 mb-1">
                   <span>
@@ -110,7 +105,6 @@ export default function Quests() {
                 </div>
               </div>
 
-              {/* FOOTER */}
               <div className="flex justify-between items-center mt-2">
                 <div className="text-sm text-amber-400">
                   🪙 {q.quest.rewardCoins}

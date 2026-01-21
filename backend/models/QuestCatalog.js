@@ -10,7 +10,7 @@ const questCatalogSchema = new mongoose.Schema({
   },
 
   target: {
-    type: Number, // e.g. 100 steps, 10 catches
+    type: Number,
     required: true,
   },
 

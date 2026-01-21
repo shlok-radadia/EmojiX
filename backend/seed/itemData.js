@@ -1,6 +1,4 @@
 export const itemCatalogSeed = [
-  /* ================= STARTER ================= */
-
   {
     key: "rusty_boots",
     name: "Rusty Boots",
@@ -37,8 +35,6 @@ export const itemCatalogSeed = [
     effect: { type: "catch_chance", value: 5 },
   },
 
-  /* ================= MID GAME ================= */
-
   {
     key: "explorer_boots",
     name: "Explorer Boots",
@@ -74,7 +70,6 @@ export const itemCatalogSeed = [
     description: "+12% catch chance",
     effect: { type: "catch_chance", value: 12 },
   },
-  /* ================= LATE GAME ================= */
 
   {
     key: "reinforced_exosuit",
@@ -111,7 +106,6 @@ export const itemCatalogSeed = [
     description: "+20% catch chance",
     effect: { type: "catch_chance", value: 20 },
   },
-  /* ================= OP / RELIC ================= */
 
   {
     key: "golden_exoskeleton",

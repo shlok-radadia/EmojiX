@@ -11,7 +11,7 @@ const emojiCatalogSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      index: true, // 🔥 enables fast search
+      index: true,
     },
 
     rarity: {
@@ -21,7 +21,7 @@ const emojiCatalogSchema = new mongoose.Schema(
     },
 
     biomes: {
-      type: [String], // ["Grass", "Water"]
+      type: [String],
       required: true,
     },
 
@@ -30,7 +30,6 @@ const emojiCatalogSchema = new mongoose.Schema(
       required: true,
     },
 
-    // Optional fine-tuning for special emojis
     catchChanceOverride: {
       type: Number,
       min: 0,
@@ -44,7 +43,7 @@ const emojiCatalogSchema = new mongoose.Schema(
       default: null,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const EmojiCatalog = mongoose.model("EmojiCatalog", emojiCatalogSchema);

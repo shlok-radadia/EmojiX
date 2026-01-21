@@ -12,7 +12,6 @@ export const equipItem = async (req, res) => {
     return res.status(403).json({ message: "Invalid item" });
   }
 
-  // Unequip previous
   if (user.equippedItem) {
     await UserItem.findByIdAndUpdate(user.equippedItem, {
       equipped: false,

@@ -1,14 +1,10 @@
 import EmojiInstance from "../models/EmojiInstance.js";
 
-/* ===============================
-   GET EMOJI INVENTORY
-================================ */
 export const getEmojiInventory = async (req, res) => {
   try {
     const userId = req.user.id;
     const { rarity, variant, biome, search } = req.query;
 
-    /* ---------- BASE FILTER ---------- */
     const filter = {
       owner: userId,
       lockedForTrade: false,
@@ -17,7 +13,6 @@ export const getEmojiInventory = async (req, res) => {
     if (rarity) filter.finalRarity = rarity;
     if (variant) filter.variant = variant;
 
-    /* ---------- QUERY ---------- */
     let instances = await EmojiInstance.find(filter)
       .populate("emoji")
       .sort({ createdAt: -1 })
@@ -29,12 +24,10 @@ export const getEmojiInventory = async (req, res) => {
       );
     }
 
-    /* ---------- BIOME FILTER (FROM CATALOG) ---------- */
     if (biome) {
       instances = instances.filter((i) => i.emoji.biomes.includes(biome));
     }
 
-    /* ---------- FORMAT ---------- */
     const items = instances.map((i) => ({
       instanceId: i._id.toString(),
       symbol: i.emoji.symbol,

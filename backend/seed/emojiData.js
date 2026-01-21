@@ -1,5 +1,4 @@
 export const emojiCatalogSeed = [
-  /* ================= COMMON ================= */
   {
     symbol: "🌱",
     name: "First Sprout",
@@ -50,7 +49,6 @@ export const emojiCatalogSeed = [
     lore: "A fragment of fire that refuses to die. Even cooled stone remembers its warmth.",
   },
 
-  /* ================= UNCOMMON ================= */
   {
     symbol: "🌾",
     name: "Kingmaker Grain",
@@ -94,7 +92,6 @@ export const emojiCatalogSeed = [
     lore: "Built by forgotten hands during a winter that never truly ended.",
   },
 
-  /* ================= RARE ================= */
   {
     symbol: "🌵",
     name: "Bloodwater Cactus",
@@ -131,7 +128,6 @@ export const emojiCatalogSeed = [
     lore: "Its silence terrifies more than its eruption ever could.",
   },
 
-  /* ================= EPIC ================= */
   {
     symbol: "🦌",
     name: "Glimmerhart Stag",
@@ -168,7 +164,6 @@ export const emojiCatalogSeed = [
     lore: "When it awakens, entire valleys fall silent in fear.",
   },
 
-  /* ================= MYTHIC ================= */
   {
     symbol: "🦅",
     name: "Horizon Judge",
@@ -198,7 +193,6 @@ export const emojiCatalogSeed = [
     lore: "Each scale remembers a civilization it burned.",
   },
 
-  /* ================= LEGENDARY ================= */
   {
     symbol: "🦄",
     name: "Oathbound Unicorn",

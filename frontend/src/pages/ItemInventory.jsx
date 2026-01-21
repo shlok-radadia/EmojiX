@@ -38,12 +38,11 @@ export default function ItemInventory() {
   };
 
   const filtered = items.filter((i) =>
-    i.name.toLowerCase().includes(search.toLowerCase())
+    i.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
     <div className="h-[calc(100vh-4rem)] bg-[#0f0f12] text-white flex flex-col">
-      {/* HEADER */}
       <div className="px-6 py-4 border-b border-[#222] flex justify-between">
         <h1 className="text-xl font-semibold">🎒 Items</h1>
 
@@ -56,7 +55,6 @@ export default function ItemInventory() {
         />
       </div>
 
-      {/* EQUIPPED ITEM – FIXED */}
       <div className="px-6 py-4 border-b border-[#222] bg-[#141418]">
         <div className="text-xs text-gray-400 mb-2">Equipped Item</div>
 
@@ -91,12 +89,10 @@ export default function ItemInventory() {
         )}
       </div>
 
-      {/* MESSAGE */}
       {message && (
         <div className="px-6 py-2 text-sm text-indigo-300">{message}</div>
       )}
 
-      {/* INVENTORY LIST – SCROLL ONLY HERE */}
       <div className="flex-1 overflow-y-auto px-6 scrollbar-thin scrollbar-thumb-[#2a2a32]">
         {filtered.length === 0 && (
           <div className="text-sm text-gray-500 mt-6">No items found</div>

@@ -1,4 +1,3 @@
-// routes/dailyRoutes.js
 import express from "express";
 import { claimDailyBonus } from "../controllers/dailyController.js";
 import { protect } from "../middleware/auth.js";

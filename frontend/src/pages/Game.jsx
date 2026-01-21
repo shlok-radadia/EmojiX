@@ -1,13 +1,9 @@
 import { useEffect, useState, useCallback } from "react";
 import api from "../api/axios";
 
-/* ================= CONFIG ================= */
-
 const VIEW = 17;
 const HALF = Math.floor(VIEW / 2);
 const REGION_SIZE = 4;
-
-/* ================= BIOMES ================= */
 
 const noise2D = (x, y) => {
   const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453123;
@@ -36,8 +32,6 @@ const getBiome = (x, y) => {
   if (n < 0.72) return "Desert";
   return "Snow";
 };
-
-/* ================= UI THEMES ================= */
 
 const biomeTile = {
   Grass: "bg-green-600",
@@ -99,8 +93,6 @@ const effectText = {
   catch_chance: "Catch Chance",
 };
 
-/* ================= GAME ================= */
-
 export default function Game() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [coins, setCoins] = useState(0);
@@ -132,8 +124,6 @@ export default function Game() {
     });
   }, []);
 
-  /* ================= MOVE ================= */
-
   const move = async (direction) => {
     if (isMoving) return;
     setIsMoving(true);
@@ -150,7 +140,6 @@ export default function Game() {
         setCoins(res.data.coins);
       }
 
-      // ✅ EXPLORATION COIN REWARD
       if (res.data.explorationReward > 0) {
         const total = res.data.explorationReward + (res.data.bonusReward || 0);
 
@@ -178,8 +167,6 @@ export default function Game() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [handleKey]);
 
-  /* ================= CATCH ================= */
-
   const catchEmoji = async () => {
     if (!encounter || isCatching) return;
     setIsCatching(true);
@@ -206,13 +193,11 @@ export default function Game() {
     }
   };
 
-  /* ================= DAILY ================= */
-
   const claim = async () => {
     const res = await api.post("/daily/claim");
     setCoins(res.data.coins);
-    // setClaimed(true);
-    setClaimedToday(true); // 🔥 THIS is the key
+
+    setClaimedToday(true);
     setMessage("🎁 Daily bonus claimed!");
   };
 
@@ -245,7 +230,6 @@ export default function Game() {
           </div>
         )}
 
-        {/* ✅ DAILY ONLY IF NOT CLAIMED */}
         {!loading && !claimedToday && (
           <div className="rounded-xl bg-[#141418] border border-[#222] p-4">
             <div className="text-sm font-medium mb-2">🎁 Daily Bonus</div>
@@ -310,8 +294,6 @@ export default function Game() {
   );
 }
 
-/* ================= MAP ================= */
-
 function Map({ position }) {
   const cells = [];
 
@@ -347,8 +329,6 @@ function Map({ position }) {
     </div>
   );
 }
-
-/* ================= CONTROLS ================= */
 
 function Controls({ move }) {
   return (

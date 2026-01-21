@@ -2,9 +2,6 @@ import User from "../models/User.js";
 import EmojiInstance from "../models/EmojiInstance.js";
 import Trade from "../models/Trade.js";
 
-/* ===============================
-   PROFILE STATS
-================================ */
 export const getProfileStats = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -21,7 +18,6 @@ export const getProfileStats = async (req, res) => {
       active: true,
     });
 
-    /* ================= RARITY BREAKDOWN ================= */
     const rarityCount = {};
     const variantCount = {};
 
@@ -51,9 +47,6 @@ export const getProfileStats = async (req, res) => {
   }
 };
 
-/* ===============================
-   PROFILE INVENTORY (NO TRADE)
-================================ */
 export const getProfileInventory = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -82,9 +75,6 @@ export const getProfileInventory = async (req, res) => {
   }
 };
 
-/* ===============================
-   PROFILE TRADES
-================================ */
 export const getProfileTrades = async (req, res) => {
   try {
     const { userId } = req.params;

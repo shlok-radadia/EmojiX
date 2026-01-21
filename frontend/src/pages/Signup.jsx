@@ -41,16 +41,13 @@ export default function Signup() {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-[#2a2a31] border border-[#34343c] rounded-xl p-8">
-        {/* Header */}
         <h2 className="text-2xl font-semibold mb-2">Create your account</h2>
         <p className="text-gray-400 mb-6">
           Join EmojiX and start collecting emojis.
         </p>
 
-        {/* Error */}
         {error && <div className="mb-4 text-sm text-red-400">{error}</div>}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             label="Username"
@@ -84,7 +81,6 @@ export default function Signup() {
           </button>
         </form>
 
-        {/* Footer */}
         <p className="mt-6 text-sm text-gray-400 text-center">
           Already have an account?{" "}
           <Link to="/login" className="text-indigo-400 hover:text-indigo-300">
@@ -96,7 +92,6 @@ export default function Signup() {
   );
 }
 
-/* Reusable input */
 function Input({ label, ...props }) {
   return (
     <div>

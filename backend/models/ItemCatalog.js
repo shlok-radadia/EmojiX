@@ -6,7 +6,7 @@ const itemCatalogSchema = new mongoose.Schema(
     name: { type: String, required: true },
     icon: { type: String, required: true },
 
-    price: { type: Number, required: true }, // market price
+    price: { type: Number, required: true },
 
     effect: {
       type: {
@@ -27,7 +27,7 @@ const itemCatalogSchema = new mongoose.Schema(
 
     description: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("ItemCatalog", itemCatalogSchema);

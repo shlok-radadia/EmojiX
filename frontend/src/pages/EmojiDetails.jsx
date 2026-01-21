@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 
-/* ================= CONSTANTS ================= */
 const RARITY_ORDER = [
   "Common",
   "Uncommon",
@@ -78,8 +77,6 @@ const biomeIcon = {
   Volcano: "🌋",
 };
 
-/* ================= COMPONENT ================= */
-
 export default function EmojiDetails() {
   const { emojiId } = useParams();
   const navigate = useNavigate();
@@ -118,7 +115,6 @@ export default function EmojiDetails() {
   return (
     <div className="min-h-full bg-[#0f0f12] text-white flex items-center justify-center px-4 overflow-auto overflow-x-hidden">
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* LEFT */}
         <div
           className={`relative rounded-3xl bg-gradient-to-b ${style.bg}
           ring-2 ${style.ring} shadow-2xl ${style.glow}
@@ -136,9 +132,7 @@ export default function EmojiDetails() {
           </div>
         </div>
 
-        {/* RIGHT */}
         <div className="flex flex-col gap-3 max-h-[calc(100vh-2rem)] overflow-auto">
-          {/* HEADER */}
           <div>
             <span
               className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${style.badge}`}
@@ -150,7 +144,6 @@ export default function EmojiDetails() {
             </h1>
           </div>
 
-          {/* BIOMES */}
           <div>
             <div className="text-xs text-gray-400 mb-1">Found In</div>
             <div className="flex gap-1 flex-wrap">
@@ -166,7 +159,6 @@ export default function EmojiDetails() {
             </div>
           </div>
 
-          {/* STATS */}
           <div className="grid grid-cols-3 gap-2">
             <Stat label="Caught (You)" value={emoji.count} />
             <Stat label="Caught (Global)" value={emoji.totalCaught} />
@@ -184,7 +176,6 @@ export default function EmojiDetails() {
             />
           </div>
 
-          {/* VARIANTS */}
           <div className="rounded-xl bg-[#141418] border border-[#222] p-3">
             <p className="text-sm font-medium text-gray-300 mb-3">Variants</p>
 
@@ -209,7 +200,6 @@ export default function EmojiDetails() {
             </div>
           </div>
 
-          {/* LORE */}
           <div className="rounded-xl bg-[#141418] border border-[#222] p-5">
             <div className="flex justify-between mb-2">
               <p className="text-sm font-medium text-gray-300">Lore</p>
@@ -233,7 +223,6 @@ export default function EmojiDetails() {
   );
 }
 
-/* ================= STAT ================= */
 function Stat({ label, value }) {
   return (
     <div className="rounded-lg bg-[#141418] border border-[#222] p-3">

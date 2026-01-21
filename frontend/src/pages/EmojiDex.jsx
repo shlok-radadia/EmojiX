@@ -14,7 +14,6 @@ const biomeIcon = {
 
 const VARIANT_ORDER = ["Normal", "Shiny", "Alpha", "Corrupted"];
 
-/* ================= RARITY THEMES ================= */
 const rarityTheme = {
   Common: "border-gray-500/40",
   Uncommon: "border-green-500/40",
@@ -57,15 +56,12 @@ export default function EmojiDex() {
 
   return (
     <div className="h-full flex bg-[#0f0f12] text-white overflow-hidden">
-      {/* ================= LEFT SIDEBAR ================= */}
       <aside className="w-[300px] shrink-0 border-r border-[#222] bg-[#111115] p-6 flex flex-col gap-6">
-        {/* TITLE */}
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">EmojiDex</h1>
           <p className="text-xs text-gray-400 mt-1">Your emoji collection</p>
         </div>
 
-        {/* OVERALL PROGRESS */}
         <div className="bg-[#141418] border border-[#222] rounded-xl p-4">
           <div className="flex items-center gap-4">
             <div className="relative w-14 h-14">
@@ -103,7 +99,6 @@ export default function EmojiDex() {
           </div>
         </div>
 
-        {/* RARITY PROGRESS */}
         <div className="space-y-3">
           {Object.entries(progress.rarity).map(([rarity, data]) => (
             <div key={rarity}>
@@ -138,7 +133,6 @@ export default function EmojiDex() {
         </div>
       </aside>
 
-      {/* ================= RIGHT GRID ================= */}
       <main className="flex-1 overflow-y-auto p-6 ">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {dex.map((emoji) => (
@@ -154,12 +148,10 @@ export default function EmojiDex() {
                 ${!emoji.discovered && "opacity-40 grayscale"}
               `}
             >
-              {/* EMOJI */}
               <div className="w-13 h-13 flex items-center justify-center rounded-lg bg-black/30 text-3xl select-none">
                 {emoji.discovered ? emoji.symbol : "❓"}
               </div>
 
-              {/* NAME */}
               <div
                 className="mt-1.5 text-xs font-medium text-center truncate w-full"
                 title={emoji.discovered ? emoji.name : "Undiscovered"}
@@ -167,7 +159,6 @@ export default function EmojiDex() {
                 {emoji.discovered ? emoji.name : "?????"}
               </div>
 
-              {/* BIOMES */}
               <div className="mt-1.5 flex gap-1 text-xs opacity-80">
                 {emoji.biomes.map((b) => (
                   <span key={b} title={b}>
@@ -176,12 +167,11 @@ export default function EmojiDex() {
                 ))}
               </div>
 
-              {/* VARIANTS */}
               <div className="mt-1.5 min-h-[32px] flex items-center justify-center">
                 {emoji.discovered && emoji.variants?.length > 0 ? (
                   <div className="flex flex-wrap justify-center gap-1">
                     {VARIANT_ORDER.filter((v) =>
-                      emoji.variants.includes(v)
+                      emoji.variants.includes(v),
                     ).map((v) => (
                       <span
                         key={v}
@@ -198,7 +188,6 @@ export default function EmojiDex() {
 
               <div className="flex-1" />
 
-              {/* FOOTER */}
               <div className="text-[10px] text-gray-500">
                 {emoji.discovered
                   ? `Collected ×${emoji.count}`

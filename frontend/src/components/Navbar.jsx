@@ -25,7 +25,6 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-[#121216] border-b border-[#26262d]">
       <div className="h-16 flex items-center justify-between px-4 sm:px-6">
-        {/* ================= LEFT ================= */}
         <Link
           to="/"
           className="text-lg font-semibold tracking-wide text-indigo-400"
@@ -33,7 +32,6 @@ export default function Navbar() {
           EmojiX
         </Link>
 
-        {/* ================= CENTER ================= */}
         {token && (
           <div className="flex items-center gap-6 text-sm">
             <NavItem to="/game">Game</NavItem>
@@ -49,7 +47,6 @@ export default function Navbar() {
           </div>
         )}
 
-        {/* ================= RIGHT ================= */}
         <div className="flex items-center gap-4 text-sm">
           {!token ? (
             <>
@@ -82,8 +79,6 @@ export default function Navbar() {
     </nav>
   );
 }
-
-/* ================= NAV ITEM ================= */
 
 function NavItem({ to, children }) {
   return (

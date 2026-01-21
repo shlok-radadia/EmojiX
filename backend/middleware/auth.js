@@ -13,14 +13,12 @@ export const protect = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      // Attach minimal user info
       req.user = {
         id: decoded.id,
       };
 
       req.user._id = req.user.id;
 
-      // OPTIONAL: only validate existence for critical routes
       if (req.validateUser) {
         const exists = await User.exists({ _id: decoded.id });
         if (!exists) {

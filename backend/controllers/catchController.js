@@ -30,25 +30,21 @@ export const catchEmoji = async (req, res) => {
       return res.status(400).json({ message: "Emoji ID required" });
     }
 
-    /* ---------- USER ---------- */
     const user = await User.findById(req.user.id);
     if (!user || !user.runPosition) {
       return res.status(400).json({ message: "User not ready" });
     }
 
-    /* ---------- EMOJI ---------- */
     const emoji = await EmojiCatalog.findById(emojiId);
     if (!emoji) {
       return res.status(404).json({ message: "Emoji not found" });
     }
 
-    /* ---------- BIOME CHECK ---------- */
     const biome = getBiome(user.runPosition.x, user.runPosition.y);
     if (!emoji.biomes.includes(biome)) {
       return res.status(400).json({ message: "Wrong biome for this emoji" });
     }
 
-    /* ---------- RARITY & VARIANT ---------- */
     const rules = rarityRules[emoji.rarity];
     const variantData = VARIANTS[variant] || VARIANTS.Normal;
 
@@ -63,7 +59,6 @@ export const catchEmoji = async (req, res) => {
 
     user.coins -= catchCost;
 
-    /* ---------- ROLL ---------- */
     const roll = Math.random() * 100;
 
     const item = await getActiveItemEffect(user);
@@ -82,17 +77,15 @@ export const catchEmoji = async (req, res) => {
       });
     }
 
-    /* ---------- FINAL RARITY ---------- */
     const finalRarity = getFinalRarity(emoji.rarity, variant);
 
-    /* ---------- SAVE INSTANCE ---------- */
     const instance = await EmojiInstance.create({
       emoji: emoji._id,
       owner: user._id,
 
-      rarity: emoji.rarity, // ✅ BASE rarity
-      variant, // ✅ variant
-      finalRarity, // ✅ boosted rarity
+      rarity: emoji.rarity,
+      variant,
+      finalRarity,
     });
 
     user.questProgressBuffer.catch += 1;

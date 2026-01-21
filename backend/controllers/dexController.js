@@ -21,18 +21,13 @@ function sortVariants(arr) {
   }));
 }
 
-/* ===============================
-   GET FULL EMOJIDEX + PROGRESSION
-================================ */
 export const getDex = async (req, res) => {
   try {
     const userId = new mongoose.Types.ObjectId(req.user.id);
 
-    /* ---------- LOAD CATALOG ---------- */
     const emojis = await EmojiCatalog.find().lean();
     const emojiMap = new Map(emojis.map((e) => [e._id.toString(), e]));
 
-    /* ---------- USER INSTANCES ---------- */
     const caught = await EmojiInstance.aggregate([
       { $match: { owner: userId } },
       {
@@ -47,7 +42,6 @@ export const getDex = async (req, res) => {
 
     const caughtMap = new Map(caught.map((c) => [c._id.toString(), c]));
 
-    /* ---------- BUILD DEX ---------- */
     const dex = emojis.map((emoji) => {
       const found = caughtMap.get(emoji._id.toString());
 
@@ -68,7 +62,6 @@ export const getDex = async (req, res) => {
       return RARITY_ORDER.indexOf(a.rarity) - RARITY_ORDER.indexOf(b.rarity);
     });
 
-    /* ---------- PROGRESSION ---------- */
     const progress = {
       discovered: dex.filter((e) => e.discovered).length,
       total: dex.length,
@@ -76,13 +69,11 @@ export const getDex = async (req, res) => {
       biomes: {},
     };
 
-    /* RARITY TOTALS */
     for (const emoji of emojis) {
       progress.rarity[emoji.rarity] ??= { discovered: 0, total: 0 };
       progress.rarity[emoji.rarity].total++;
     }
 
-    /* BIOME TOTALS */
     for (const emoji of emojis) {
       for (const biome of emoji.biomes || []) {
         progress.biomes[biome] ??= { discovered: 0, total: 0 };
@@ -90,7 +81,6 @@ export const getDex = async (req, res) => {
       }
     }
 
-    /* DISCOVERED COUNTS */
     for (const entry of dex) {
       if (!entry.discovered) continue;
 
@@ -107,9 +97,6 @@ export const getDex = async (req, res) => {
   }
 };
 
-/* ===============================
-   GET SINGLE EMOJI DETAILS
-================================ */
 export const getEmojiDetails = async (req, res) => {
   try {
     const { emojiId } = req.params;

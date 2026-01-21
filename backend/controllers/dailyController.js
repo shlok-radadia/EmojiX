@@ -1,4 +1,3 @@
-// controllers/dailyController.js
 import User from "../models/User.js";
 
 export const claimDailyBonus = async (req, res) => {

@@ -1,5 +1,4 @@
 export const questCatalogSeed = [
-  // MOVE
   {
     key: "move_50",
     type: "MOVE",
@@ -28,7 +27,6 @@ export const questCatalogSeed = [
     description: "Travel 1000 steps",
   },
 
-  // CATCH
   {
     key: "catch_5",
     type: "CATCH",
@@ -48,7 +46,6 @@ export const questCatalogSeed = [
     description: "Catch 30 emojis",
   },
 
-  // SELL
   {
     key: "sell_3",
     type: "SELL",

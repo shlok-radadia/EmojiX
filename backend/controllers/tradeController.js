@@ -2,7 +2,6 @@ import Trade from "../models/Trade.js";
 import EmojiInstance from "../models/EmojiInstance.js";
 import User from "../models/User.js";
 
-/* ================= CREATE LISTING ================= */
 export const createTrade = async (req, res) => {
   const { instanceId, price } = req.body;
 
@@ -11,7 +10,7 @@ export const createTrade = async (req, res) => {
   }
 
   const emoji = await EmojiInstance.findById(instanceId);
-  if (!emoji || emoji.owner.toString() !== req.user.id) {
+  if (!emoji || emoji.owner._id.toString() !== req.user.id) {
     return res.status(403).json({ message: "Invalid emoji" });
   }
 
@@ -31,26 +30,28 @@ export const createTrade = async (req, res) => {
   res.json({ success: true });
 };
 
-/* ================= CANCEL LISTING ================= */
 export const cancelTrade = async (req, res) => {
   const { tradeId } = req.body;
 
   const trade = await Trade.findById(tradeId).populate("emojiInstance");
 
-  if (!trade || trade.seller.toString() !== req.user.id) {
+  if (!trade || trade.seller._id.toString() !== req.user.id) {
     return res.status(403).json({ message: "Not allowed" });
   }
 
   trade.active = false;
-  trade.emojiInstance.lockedForTrade = false;
+  //   trade.emojiInstance.lockedForTrade = false;
 
-  await trade.emojiInstance.save();
+  await EmojiInstance.findByIdAndUpdate(trade.emojiInstance, {
+    lockedForTrade: false,
+  });
+
+  //   await trade.emojiInstance.save();
   await trade.save();
 
   res.json({ success: true });
 };
 
-/* ================= BUY ================= */
 export const buyTrade = async (req, res) => {
   const { tradeId } = req.body;
 
@@ -86,7 +87,6 @@ export const buyTrade = async (req, res) => {
   res.json({ success: true, coins: buyer.coins });
 };
 
-/* ================= LIST TRADES ================= */
 export const getTrades = async (req, res) => {
   const { rarity, variant, search, mine } = req.query;
 
@@ -116,6 +116,8 @@ export const getTrades = async (req, res) => {
     );
   }
 
+  //   console.log(trades[0].seller._id.toString() === req.user.id);
+
   res.json({
     trades: trades.map((t) => ({
       tradeId: t._id,
@@ -125,7 +127,7 @@ export const getTrades = async (req, res) => {
       name: t.emojiInstance.emoji.name,
       rarity: t.emojiInstance.finalRarity,
       variant: t.emojiInstance.variant,
-      mine: t.seller.toString() === req.user.id,
+      mine: t.seller._id.toString() === req.user.id,
 
       seller: {
         id: t.seller._id,

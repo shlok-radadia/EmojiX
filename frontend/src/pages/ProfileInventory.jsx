@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../api/axios";
 
-/* ================= UI CONFIG ================= */
-
 const rarityStyle = {
   Common: "border-gray-500/30",
   Uncommon: "border-green-500/40",
@@ -20,12 +18,14 @@ const variantBadge = {
   Corrupted: "bg-purple-700/30 text-purple-300",
 };
 
-/* ================= COMPONENT ================= */
-
 export default function ProfileInventory() {
   const { userId } = useParams();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = "Emojis";
+  }, []);
 
   useEffect(() => {
     api.get(`/profile/${userId}/inventory`).then((res) => {
@@ -53,7 +53,6 @@ export default function ProfileInventory() {
         ← Back to Profile
       </Link>
 
-      {/* ================= HEADER ================= */}
       <div className="mb-6">
         <h1 className="text-2xl font-semibold tracking-tight">
           🎒 Emoji Inventory
@@ -63,12 +62,10 @@ export default function ProfileInventory() {
         </p>
       </div>
 
-      {/* ================= EMPTY ================= */}
       {items.length === 0 && (
         <div className="text-gray-500 text-sm">No emojis in inventory.</div>
       )}
 
-      {/* ================= GRID ================= */}
       <div
         className="grid gap-6"
         style={{
@@ -83,7 +80,6 @@ export default function ProfileInventory() {
             transition hover:-translate-y-1 hover:shadow-xl
             ${rarityStyle[e.rarity]}`}
           >
-            {/* VARIANT */}
             <div
               className={`absolute top-3 right-3 px-2 py-0.5 rounded-full text-[10px]
               ${variantBadge[e.variant]}`}
@@ -91,13 +87,10 @@ export default function ProfileInventory() {
               {e.variant}
             </div>
 
-            {/* EMOJI */}
             <div className="text-[3.2rem] select-none mb-2">{e.symbol}</div>
 
-            {/* NAME */}
             <div className="font-medium text-sm truncate w-full">{e.name}</div>
 
-            {/* META */}
             <div className="text-[11px] text-gray-400 mt-1">{e.rarity}</div>
           </div>
         ))}
