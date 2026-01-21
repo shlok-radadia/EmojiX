@@ -1,9 +1,6 @@
 import axios from "axios";
-const burl = import.meta.env.FRONTEND_URL
-  ? "/api"
-  : "http://localhost:5000/api";
 const api = axios.create({
-  baseURL: burl,
+  baseURL: import.meta.env.DEV ? "http://localhost:5000/api" : "/api",
 });
 
 api.interceptors.request.use((config) => {
